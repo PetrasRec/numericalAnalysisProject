@@ -5,5 +5,5 @@ function [T] = readCityData(filterCities)
     % Filter table
     %  & ismember(T.city_ascii, filterCities)
     T = T(T.country == "Korea, South" , 2:4);
-    T = T(1:30, :);
+    T = T(1:15, :);
 end
