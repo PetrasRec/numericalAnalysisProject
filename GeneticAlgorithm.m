@@ -1,7 +1,9 @@
 
 function [bestCities, distances] = GeneticAlgorithm(cities)
     populationSize = 50;
+    iterations = 500;
     elites = 10;
+    mutationRate = 6.0;
     population = generateSeedPopulations(populationSize, cities);
     population{1}.fitness = intmax;
     bestSolution = population{1};
@@ -14,7 +16,8 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
         for i=1:size(population, 1)
            population{i}.fitness = CalculateTotalDistance(population{i}.cities);
            if bestSolution.fitness > population{i}.fitness
-              bestSolution = population{i}; 
+              bestSolution = population{i};
+              DrawMapSouthKorea(bestSolution.cities, population{i}.fitness, iterations);
            end
            
            if population{i}.fitness < bestDistance
@@ -58,14 +61,13 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
         citiesCount = size(a.cities, 1);
         
         startIndex = floor(generateRandNumber(1, citiesCount)) + 1;
-        l = floor(generateRandNumber(1, citiesCount)) + 1;
+        l = floor(generateRandNumber(1, citiesCount));
         names = cell(l, 1);
-        idx = 1;
-        
-        
+
         % From startIndex till startIndex + l is picked from a
         % The rest is picked from b
         aCitiesNames = a.cities.city_ascii;
+        idx = 1;
         while l > 0
             names{idx} = char(aCitiesNames(startIndex));
             idx = idx + 1;
@@ -77,7 +79,6 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
         end
         
         newBreed = a.cities;
-        
         bCitiesNames = b.cities.city_ascii;
         
         for i=1:citiesCount
@@ -111,14 +112,13 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
 
             c = State(crossOver(selectBreed(population), selectBreed(population)));
             % mutate selected breed
-            c = mutate(c, 7.0);
+            newChild = mutate(c, mutationRate);
             
-            preAllocatedArrayOfPopulation{i} = c;
+            preAllocatedArrayOfPopulation{i} = newChild;
         end
         newPopulation = preAllocatedArrayOfPopulation;
     end
     
-    iterations = 800;
     distances = zeros(iterations, 1);
     dIndex = 1;
     while iterations > 0
@@ -130,5 +130,7 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
         dIndex = dIndex + 1;
     end
     
+    
+    DrawMapSouthKorea(bestSolution.cities, bestSolution.fitness, iterations);
     bestCities = bestSolution.cities;
 end
