@@ -6,11 +6,11 @@ for i = 1 : length(currentSolution) - 1
     currentNode = currentSolution(i);
     nextNode =  currentSolution(i+1);
     
-    x1 = graph.node(currentNode).lat;
-    y1 = graph.node(currentNode).lng;
+    x1 = graph.node(currentNode).lng;
+    y1 = graph.node(currentNode).lat;
     
-    x2 = graph.node(nextNode).lat;
-    y2 = graph.node(nextNode).lng;
+    x2 = graph.node(nextNode).lng;
+    y2 = graph.node(nextNode).lat;
     
     X = [x1 , x2];
     Y = [y1, y2];
@@ -18,8 +18,8 @@ for i = 1 : length(currentSolution) - 1
 end
 for i = 1 : graph.n
     
-    X = [graph.node(:).lat];
-    Y = [graph.node(:).lng];
+    X = [graph.node(:).lng];
+    Y = [graph.node(:).lat];
     
     plot(X, Y, 'ok', 'markerSize' , 10 , 'MarkerEdgeColor' , 'r' , 'MarkerFaceColor', [1, 0.6, 0.6]);
 end

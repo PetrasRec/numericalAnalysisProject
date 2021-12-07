@@ -22,9 +22,9 @@ function Run_GA_vs_Bruteforce()
 end
 
 function Run_SA_vs_GA()
-    [~, distances] = GeneticAlgorithm(20);
+    [~, distances] = GeneticAlgorithm(25);
     
-    SimulatedAnnealing(20);
+    SimulatedAnnealing(25);
     
     figure(3)
     plot(distances);
