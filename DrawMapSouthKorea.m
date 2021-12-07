@@ -4,8 +4,8 @@
 %geolimits([45 62],[-149 -123])
 
 
-function DrawMapSouthKorea(cities, distance, iteration)
-    figure(1)
+function DrawMapSouthKorea(cities, figureId, customText)
+    figure(figureId)
     finishIndex=(size(cities, 1) - 1);
     children = get(gca, 'children');
     delete(children);
@@ -23,7 +23,6 @@ function DrawMapSouthKorea(cities, distance, iteration)
         end
     end
     hold off
-    
-    title(sprintf("Distance: %.2f | Iteration: %d", distance, iteration))
+    title(customText);
     grid
 end
