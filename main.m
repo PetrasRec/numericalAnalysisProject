@@ -2,28 +2,31 @@
 
 set(groot,'defaultfigureposition',[400 250 900 750])
 
-%{
-%cities = ["Seoul" "Busan", "Sokcho", "Jeju", "Jeonju", "Incheon", "Daegu", "Andong"];
-cities = ["Seoul" "Busan", "Sokcho", "Jeju", "Jeonju", "Incheon", "Daegu", "Andong", "Daejeon", "Gwangju", "Suwon", "Jeosu", "Hanam", "Yeosu", "Paju", "Gimpo", "Pohang", "Osan", "Mokpo"];
+Run_SA_vs_GA();
 
-cities = ["Seoul" "Busan", "Sokcho", "Jeju", "Jeonju", "Incheon", "Daegu", "Andong", "Daejeon",  "Gwangju", "Suwon", "Jeosu", "Hanam", "Paju", "Gimpo", "Pohang", "Osan", "Mokpo"];
+%Run_GA_vs_Bruteforce();
 
+function Run_GA_vs_Bruteforce()
+    [~, distances] = GeneticAlgorithm(8);
+    
+    figure(2)
+    plot(distances);
+    grid
+    
+    distances = BruteForce(8);
+    
+    figure(4)
+    plot(distances);
+    grid
 
-[bestSolution, distances] = GeneticAlgorithm(cities);
+end
 
-figure(2)
-plot(distances);
-grid
-%}
-[~, distances] = BruteForce([]);
-
-figure(3)
-plot(distances);
-grid
-
-[bestSolution, distances] = GeneticAlgorithm([]);
-
-
-figure(4)
-plot(distances);
-grid
+function Run_SA_vs_GA()
+    [~, distances] = GeneticAlgorithm(20);
+    
+    SimulatedAnnealing(20);
+    
+    figure(3)
+    plot(distances);
+    grid
+end

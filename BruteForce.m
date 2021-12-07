@@ -1,7 +1,7 @@
 
 
-function [bestCities, distances] = BruteForce(cityNames)
-    cities = readCityData(cityNames);
+function [bestCities, distances] = BruteForce(cityCount)
+    cities = readCityData(cityCount);
    
     bestDistance = intmax;
     bestCities = [];
@@ -20,7 +20,7 @@ function [bestCities, distances] = BruteForce(cityNames)
             if totalDistance < bestDistance
                 bestDistance = totalDistance;
                 bestCities = currentSolution;
-                DrawMapSouthKorea(bestCities, 1, sprintf("distance: %.2f | %d/%d", bestDistance, iteration, allIterations));
+                DrawMapSouthKorea(bestCities, 3, sprintf("distance: %.2f | %d/%d", bestDistance, iteration, allIterations));
             end
             iteration = iteration + 1;
         else
@@ -36,5 +36,5 @@ function [bestCities, distances] = BruteForce(cityNames)
     
     DFS(1:size(cities, 1), []);
     disp("heehehe");
-    DrawMapSouthKorea(bestCities, 1, sprintf("distance: %.2f | %d/%d", bestDistance, iteration, allIterations));
+    DrawMapSouthKorea(bestCities, 3, sprintf("distance: %.2f | %d/%d", bestDistance, iteration, allIterations));
 end

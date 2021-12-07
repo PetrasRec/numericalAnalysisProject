@@ -1,12 +1,12 @@
 
-function [bestCities, distances] = GeneticAlgorithm(cities)
+function [bestCities, distances] = GeneticAlgorithm(cityCount)
     populationSize = 50;
-    iterations = 100;
+    iterations = 400;
     elites = 10;
     mutationRate = 6.0;
     generations = 0;
    
-    population = generateSeedPopulations(populationSize, cities);
+    population = generateSeedPopulations(populationSize, cityCount);
     population{1}.fitness = intmax;
     bestSolution = population{1};
     
@@ -19,7 +19,7 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
            population{i}.fitness = CalculateTotalDistance(population{i}.cities);
            if bestSolution.fitness > population{i}.fitness
               bestSolution = population{i};
-              DrawMapSouthKorea(bestSolution.cities, 2, sprintf("Best distance found: %.2f | Generation: %d", population{i}.fitness, generations));
+              DrawMapSouthKorea(bestSolution.cities, 1, sprintf("Best distance found: %.2f | Generation: %d", population{i}.fitness, generations));
            end
            
            if population{i}.fitness < bestDistance
@@ -134,6 +134,6 @@ function [bestCities, distances] = GeneticAlgorithm(cities)
     end
     
     
-    DrawMapSouthKorea(bestSolution.cities, 2, sprintf("Best distance found: %.2f | Generation: %d", bestSolution.fitness, generations));
+    DrawMapSouthKorea(bestSolution.cities, 1, sprintf("Best distance found: %.2f | Generation: %d", bestSolution.fitness, generations));
     bestCities = bestSolution.cities;
 end

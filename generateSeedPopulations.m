@@ -1,7 +1,7 @@
 
 
-function populations = generateSeedPopulations(populationSize, cityNames)
-    initialPop = readCityData(cityNames);
+function populations = generateSeedPopulations(populationSize, cityCount)
+    initialPop = readCityData(cityCount);
    
     populations = cell(populationSize, 1);
     shuffle = @(v) v(randperm(size(v, 1)), :);
